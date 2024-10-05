@@ -1,0 +1,304 @@
+﻿@model  PA.Web.Models.UsuarioMOD
+@{
+
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        @using (Html.BeginForm("Atualizar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+     
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edição</h4>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+
+
+
+                    <div class="contain animated bounce">
+
+                        <div class="alert"></div>
+                        <div id='imagePreview2' style="margin:0 auto;"><img src="~/Content/Uploads/@ViewBag.Foto" style="max-height:178px; width:100%" height="250" /></div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                @Html.TextBoxFor(x => x.File, new { @id = "uploadFile2", @Value = ViewBag.Foto, @class = "img", @name = "image", type = "file" })
+                                @*  <input type="file" id="inputGroupFile01" class="imgInp custom-file-input" aria-describedby="inputGroupFileAddon01">*@
+                                <label class="custom-file-label" for="inputGroupFile02">Escolha a sua foto:</label>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-database fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Id, new { @Value = ViewBag.Id, @class = "form-control", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Nome, new { @Value = ViewBag.Nome, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Login, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in " aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Login, new { @Value = ViewBag.Login, @class = "form-control", @placeholder = "Ainda não uma solução." })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Senha, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa fa-shield fa-fw" aria-hidden="true"></span></span>
+                                @Html.PasswordFor(x => x.Senha, new { @Value = ViewBag.Senha, @class = "form-control", @type = "password" })
+
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Idade, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Idade, new { @id = "cep", @Value = ViewBag.Idade, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Estado, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Estado, new { @id = "cep", @Value = ViewBag.Estado, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Cidade, new { @id = "cep", @Value = ViewBag.Cidade, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cep, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Cep, new { @Value = ViewBag.Cep, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Endereco, new { @Value = ViewBag.Endereco, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Latitude, new { @Value = ViewBag.Latitude, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Longitude, new { @Value = ViewBag.Longitude, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Rg, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Rg, new { @Value = ViewBag.Rg, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CpfCnpj, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.CpfCnpj, new { @id = "cpf", @Value = ViewBag.CpfCnpj, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.GrupoUsuario, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa fa-group fa-fw" aria-hidden="true"></span></span>
+                                @Html.DropDownListFor(x => x.GrupoUsuario.Id, (IEnumerable<SelectListItem>)ViewBag.GrupoUsuario, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Email, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa fa-envelope-o fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Email, new { @Value = ViewBag.Email, @class = "form-control" })
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Celular, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa fa-phone-square fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Celular, new { @Value = ViewBag.Celular, @class = "form-control" })
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.FlagAtivo, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.CheckBoxFor(x => x.FlagAtivo, new { IsChecked = ViewBag.FlagAtivo, @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.FlagAtivo)
+                        </div>
+                    </div>
+                    <br />
+                    <table border="0">
+                        <tr>
+
+                            <td valign="top" align="left">
+                                <h4>Especialidade Disponíveis</h4>
+
+                                <ul class="list-group">
+                                    @Html.ListBoxFor(x => x.Especialidade, (IEnumerable
+                                    <SelectListItem>)ViewBag.listaEspecialidade, new { @id = "AvailableCategories3", @class = "form-control", @style = "width:100%" })
+                                </ul>
+                            </td>
+
+
+                            <td valign="middle" align="center">
+                                <input id="btnAdd3" style="margin:10px;" type="button" value=" > " onclick="addConfiguracao3();" /><br />
+                                <input id="btnRemove3" style="margin:10px;" type="button" value=" < " onclick="removeConfiguracao3();" /><br />
+                            </td>
+                            <td valign="top" align="left">
+                                <h4>Especialidade Adicionados</h4>
+                                <ul class="list-group">
+                                    @Html.ListBoxFor(x => x.EspecialidadeTratado, (IEnumerable
+                                    <SelectListItem>)ViewBag.listaEspecialidadeAdicionado, new { @id = "SelectedCategories3", @class = "list-group-item", @style = "width:100%" })
+
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <input type="submit" value="Atualizar" class="btn btn-warning" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
+
+    </div><!-- /.modal-content -->
+
+
+</div><!-- /.modal-dialog -->
+
+<script>
+
+    $("#uploadFile2").on("change", function () {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test(files[0].type)) { // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () { // set image data as background of div
+                $("#imagePreview2").css("background-image", "url(" + this.result + ")");
+            }
+        }
+    });
+    $('#imagePreview2').click(function () {
+        $('#uploadFile2').trigger('click');
+    });
+
+</script>

@@ -1,0 +1,215 @@
+﻿@model PA.Web.Models.EspecialidadeMOD
+
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Corpo Detalhe -->
+<div class="row">
+
+    <div class="col-lg-12">
+        <input type="submit" style="margin:15px 2px"
+               name="cadastrar"
+               value="Adicionar >>" class="btn btn-success add" />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Usuário
+
+            </div>
+
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+
+                <div class="dataTable_wrapper">
+
+                    <table class="table table-striped table-bordered table-hover" id="dtPadrao">
+
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome </th>
+                             
+                                <th>Editar</th>
+                                <th>Deletar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var Especialidade in Model.lstEspecialidadeMod)
+                            {
+                                <tr>
+                                    <td align="justify">@Especialidade.Id</td>
+                                    <td align="justify">@Especialidade.Nome</td>
+                             
+
+                           
+
+                                    <td width="10%" align="center">
+                                        <button class="btn btn-primary edit bg-warning" data-container="@Especialidade" data-bind="@Especialidade" data-id="@Especialidade.Id">
+                                            <i class="glyphicon glyphicon-edit"></i>
+
+
+                                        </button>
+
+
+                                    </td>
+
+                                    <td width="10%" align="center">
+                                        <button class="btn btn-danger delete" data-id="@Especialidade.Id">
+                                            <i class="glyphicon glyphicon-trash"></i>
+
+
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- Modal EDITAR-->
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog">
+
+    @Html.Partial("TEdit")
+    <!-- /.modal-dialog -->
+</div>
+<!-- FIM  Modal EDITAR-->
+<!-- Modal EDITAR-->
+<div class="modal fade" id="modalDeletar" tabindex="-1" role="dialog">
+
+    @Html.Partial("TDelete")
+    <!-- /.modal-dialog -->
+</div>
+<!-- FIM  Modal EDITAR-->
+<!-- Modal CADASTRAR-->
+<div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cadastro de Especialidade </h4>
+            </div>
+            <div class="modal-body ">
+                <div class="container ">
+                    <div class="modal-body ">
+                        <div class="container ">
+                            @*Ou programa em HTML PURO ou utilize os HTML HELPERS
+                                HELPERS são formas elegantes de gerar HTML a partir
+                                de código em Visual C#*@ 
+                            @*BeginForm vai gerar uma tag <FORM> e dentro dele
+                                passamos 3 parametro
+                                Nome da action, Nome do Controller e o tipo de envio*@
+
+
+                            @using (Ajax.BeginForm("Cadastrar", "Especialidade", FormMethod.Post,
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "container"
+    }))
+                            {
+                                <div class="col-md-5">
+                                    <br />
+                                    @Html.LabelFor(x => x.Nome)
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                        @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", @placeholder = "Especialidade. Exemplo: Bahia" })
+                                        @Html.ValidationMessageFor(x => x.Nome)
+                                    </div>
+                                    <br />
+                         
+
+                                            <br />
+                                            <div class="modal-footer">
+                                                <input type="reset"
+                                                       name="limpar"
+                                                       value="Limpar" class="btn btn-default" />
+                                                <input type="submit"
+                                                       name="cadastrar"
+                                                       value="Cadastrar" class="btn btn-success" />
+
+                                            </div>
+                                        </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<!-- FIM  Modal CADASTRAR-->
+
+
+
+<script>
+
+
+    $('#product-table a:first').tab('show');
+
+
+    $(document).ready(function () {
+        $('#dtPadrao').dataTable({
+            "aLengthMenu": [[8, 50, 75, -1], [8, 50, 75, "Todos"]],
+            "iDisplayLength": 8
+        });
+    });
+
+    $(function () {
+        $(".add").click(function () {
+
+            $("#modalCadastrar").modal();
+
+
+
+        });
+    })
+
+
+
+
+
+    $(".edit").click(function () {
+        var id = $(this).attr("data-id");
+
+        $("#modalEditar").load("TEdit?id=" + id, function () {
+
+            $("#modalEditar").modal();
+
+
+        })
+    });
+
+
+    $(".delete").click(function () {
+        var id = $(this).attr("data-id");
+
+        $("#modalDeletar").load("TDelete?id=" + id, function () {
+
+            $("#modalDeletar").modal();
+
+
+        })
+    });
+
+
+</script>

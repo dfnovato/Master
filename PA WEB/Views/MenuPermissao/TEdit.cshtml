@@ -1,0 +1,71 @@
+﻿@model PA.Web.Models.MenuMOD
+@{
+
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        @using (Ajax.BeginForm("Atualizar", "MenuPermissao", FormMethod.Post,
+                                                new AjaxOptions
+                                                {
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    HttpMethod = "POST",
+                                                    UpdateTargetId = "container"
+                                                }))
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edição</h4>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-database fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Id, new { @Value = ViewBag.Id, @class = "form-control", @readonly = "readonly" })
+                             
+                            </div>
+                            </div>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nameOption, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+
+                                @Html.TextBoxFor(model => model.nameOption, new { @Value = ViewBag.nameOption, @class = "form-control" })
+                             
+                            </div>
+                            </div>
+                    </div>
+
+                  
+                    <br />
+
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <input type="submit" value="Atualizar" class="btn btn-warning" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
+
+    </div><!-- /.modal-content -->
+
+
+</div><!-- /.modal-dialog -->

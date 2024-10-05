@@ -1,0 +1,509 @@
+﻿@model PA.Web.Models.HomeMOD
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/chart.css")" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Painel de Controle</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row" >
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel " style="background-color:#B79910; color:#FFFFFF;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-folder-open fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @ViewBag.ProgramaAberto
+                        </div>
+                        <div>Programas Abertos</div>
+                    </div>
+                </div>
+            </div>
+            <a href="./MapaPrograma/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel " style="background-color:#745FC1; color:#FFFFFF;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-folder-open fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @ViewBag.ProgramasCadastrado
+                        </div>
+                        <div>Programas Cadastrados</div>
+                    </div>
+                </div>
+            </div>
+            <a href="./MapaPrograma/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-tower fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"> @ViewBag.ProgramasInativo</div>
+                        <div>Programas Inativos</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel " style="background-color:#B79910; color:#FFFFFF;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-hdd fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Propostas</div>
+                        <div>Banco de Propostas</div>
+                    </div>
+                </div>
+            </div>
+            <a href="./MapaProposta/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+
+
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-bullhorn fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @ViewBag.Emenda 
+                        </div>
+                        <div>Emendas</div>
+                    </div>
+                </div>
+            </div>
+            <a href="./EmendaEscolha/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    @*<div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-asterisk fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Propostas</div>
+                        <div>Convênios</div>
+                    </div>
+                </div>
+            </div>
+            <a href="./MapaProposta/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>*@
+    @*<div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-screenshot fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Contagem</div>
+                        <div>Meta Cronograma</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left"> Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>*@
+
+
+    @*<div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-time fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"> @ViewBag.Chamar</div>
+                        <div>Etapa Cronograma</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>*@
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-indent-left fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"> @ViewBag.Chamar</div>
+                        <div>Segmento Propostas</div>
+                    </div>
+                </div>
+            </div>
+            <a href="~/SegmentoProposta/Index">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-list fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Contagem</div>
+                        <div>Segmento Programas</div>
+                    </div>
+                </div>
+            </div>
+            <a href="~/SegmentoPrograma/Index">
+                <div class="panel-footer">
+                    <span class="pull-left"> Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel " style="background-color:#B77E10; color:#FFFFFF;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-list-alt fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"> @ViewBag.MinhasPropostas</div>
+                        <div>Minhas Propostas</div>
+                    </div>
+                </div>
+            </div>
+            <a href="MinhaProposta/Index">
+                <div class="panel-footer">
+                    <span class="pull-left"> Ver detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- /.row -->
+    <div class="row">
+
+
+        @*<div class="col-md-6">
+            Propostas
+            <div id="area-example"></div>
+        </div>*@
+   
+
+        <div class="col-lg-12">
+            Propostas
+            <div id="bar-example"></div>
+        </div>
+    </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-6">
+
+            @*<div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-comments fa-fw"></i>
+                    Quadro de avisos
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-refresh fa-fw"></i> Atualizar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-check-circle fa-fw"></i> Disponível
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-times fa-fw"></i> Ocupado
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-clock-o fa-fw"></i> Ausente
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out fa-fw"></i> Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Ricardo Carneiro</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                    </small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                            <span class="chat-img pull-right">
+                                <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 13 mins ago
+                                    </small>
+                                    <strong class="pull-right primary-font">João Funalo</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Ricardo Carneiro</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 14 mins ago
+                                    </small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                            <span class="chat-img pull-right">
+                                <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 15 mins ago
+                                    </small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.panel-body -->
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                Enviar
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <!-- /.panel-footer -->
+            </div>*@
+            <!-- /.panel .chat-panel -->
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+
+
+
+    <!-- /.row -->
+    <script src="../Scripts/excanvas.js"></script>
+    <script src="../Scripts/jquery.flot.js"></script>
+    <script src="../Scripts/jquery.flot.pie.js"></script>
+    <script src="../Scripts/jquery.flot.resize.js"></script>
+    <script src="../Scripts/jquery.flot.time.js"></script>
+    <script src="../Scripts/jquery.flot.tooltip.min.js"></script>
+    <script src="../Scripts/data/flot-data.js"></script>
+
+       <script src="@Url.Content("~/bower_components/morrisjs/morris.min.js")"></script>
+       <script src="@Url.Content("~/Scripts/morris-data.js")"></script>
+
+   @*<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYhO_hO0ePUiX4I6PFiJh1lsvUxU0VEY8&sensor=false"></script>*@
+
+   <script>
+
+
+             $.getScript("../Scripts/plugins/morris/raphael.min.js", function () {
+                 $.getScript("../Scripts/plugins/morris/morris.min.js", function () {
+    
+                     /*
+              * Play with this code and it'll update in the panel opposite.
+              *
+              * Why not try some of the options above?
+              */
+
+                     @Html.Raw(ViewBag.AreaChart);
+
+                     //Morris.Area({
+                     //    element: 'area-example',
+                     //    data: [
+                     //      { y: '1.1.', a: 100, b: 90 },
+                     //      { y: '2.1.', a: 75, b: 65 },
+                     //      { y: '3.1.', a: 50, b: 40 },
+                     //      { y: '4.1.', a: 75, b: 65 },
+                     //      { y: '5.1.', a: 50, b: 40 },
+                     //      { y: '6.1.', a: 75, b: 65 },
+                     //      { y: '7.1.', a: 100, b: 90 }
+                     //    ],
+                     //    xkey: 'y',
+                     //    ykeys: ['a', 'b'],
+                     //    labels: ['Propostas em potencial', 'Propostas em andamento']
+                     //});;
+
+                 })
+             });
+
+
+       var thisDate, thisData;
+       var url = "/Proposta/IndexEstado";
+       $("#bar-example").on('click', function () {
+           // Find data and date in the actual morris diply below the graph.
+           thisDate = $(".morris-hover-row-label").html();
+           thisDataHtml = $(".morris-hover-point").html().split(":");
+           thisData = thisDataHtml[1].trim();
+
+           // alert !!
+           alert("Data: " + thisData + "\nDate: " + thisDate);
+
+           window.location.href = url + "?Estado=" + thisDate;
+       });
+
+       //$('#bar-example').click(function () {
+
+       //    var url = "/Home/ConsultaEstado";
+       //    var name = $('#data').val();
+       //    alert("Handler for .click() called." + name);
+       //    $.get(url, { input: name }, function (data) {
+       //        $("#rData").html(data);
+       //    });
+       //})
+         </script>
+
+
+
+    <!-- jQuery -->
+
+<!-- Bootstrap Core JavaScript -->
+<script src="~/Scripts/plugins/morris/bootstrap.min.js"></script>
+
+<script src="~/Scripts/plugins/"></script>
+<!-- Morris Charts JavaScript -->
+<script src="~/Scripts/plugins/morris/raphael.min.js"></script>
+<script src="~/Scripts/plugins/morris/morris.min.js"></script>
+<script src="~/Scripts/data/morris-data.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="~/Scripts/sb-admin-2.js"></script>

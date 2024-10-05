@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mapa</h2>
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog">
+    @Html.Partial("TCuidador")
+    <!-- /.modal-dialog -->
+</div>
+<div id="map"></div>
+<center>Clique para ver mais informações.</center>
+<!-- Modal EDITAR-->
+
+<style>
+    #map {
+        margin: 0 auto;
+        width: 100%;
+        height: 600px;
+    }
+
+    main {
+        margin: 40px auto;
+        text-align: center;
+        background: #ffffff;
+        width: 400px;
+        padding: 20px 0;
+        font-family: "Roboto", "Arial", "sans serif";
+    }
+
+    h1 {
+        color: #11B771;
+        margin-bottom: -5px;
+    }
+
+    p {
+        font-size: 14px;
+        color: #4E4E4E;
+    }
+
+    hr {
+        margin: 30px 0;
+        background: #ffffff;
+        color: #fdfdfd;
+    }
+
+    .img-perfil {
+        width: 150px;
+        height: 150px;
+        margin: auto;
+        border: 5px solid transparent;
+        border-radius: 100%;
+    }
+
+        .img-perfil:hover {
+            border: 5px solid #11B771;
+            border-radius: 100%;
+            width: 150px;
+            height: 150px;
+            margin: auto;
+            transition: 0.5s
+        }
+
+    .caja-gris {
+        background: #ececec;
+        width: 400px;
+        margin: 30px 0;
+        padding: 20px 0;
+        /*font-size:0;*/
+        white-space: nowrap;
+    }
+
+    .sobre {
+        display: inline-block;
+        text-align: center;
+        border-right: 2px solid #ccc;
+        border-color: #3b3a3a;
+        /*width: 32%;*/
+        width: calc(100% / 3);
+        box-sizing: border-box;
+    }
+
+        .sobre:last-child {
+            border-right: transparent;
+        }
+
+        .sobre p {
+            margin-top: 0;
+        }
+    /*.sobre:after{ 
+  border-right: 2px solid #ccc;
+  border-color:#3b3a3a;
+  padding: 0px 5px 0 0;
+  
+}*/
+    .redes {
+        background-image: url(https://p.w3layouts.com/demos/june-2016/01-06-2016/model_profile_widget/web/images/social.png);
+        margin: auto;
+        display: inline-block;
+        height: 25px;
+        width: 23px;
+        margin: 0 15px;
+        transition: all 0.5s;
+    }
+
+        .redes.face {
+            background-position: 0 0;
+        }
+
+            .redes.face:hover {
+                background-position: 0 -30px;
+            }
+
+        .redes.twitter {
+            background-position: -24px 0px;
+        }
+
+            .redes.twitter:hover {
+                background-position: -24px -30px;
+            }
+
+        .redes.instagram {
+            background-position: -54px 0px;
+        }
+
+            .redes.instagram:hover {
+                background-position: -54px -30px;
+            }
+
+        .redes.youtube {
+            background-position: -84px 0px;
+        }
+
+            .redes.youtube:hover {
+                background-position: -84px -30px;
+            }
+
+    .boton a {
+        list-style: none;
+        text-decoration: none;
+        color: #fff;
+        background: #11B771;
+        padding: 8px 40px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+
+    .boton {
+        margin: 30px 0 20px;
+    }
+
+        .boton a:hover {
+            background: #3B3A3A;
+        }
+
+</style>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9lMpmX_Oe1Jzf9gDhCzp6WwNtKKVe3HI"></script>
+<script src="custom.js"></script>
+<script>
+
+    $(function () {
+        $("#btnCuidador").click(function () {
+
+            $("#modalEditar").modal();
+
+
+
+        });
+
+        $(".adiciona").click(function () {
+
+            $("#Especialidade option:selected").appendTo("#EspecialidadeTratado");
+
+
+
+        });
+
+        $(".remove").click(function () {
+            $("#EspecialidadeTratado option:selected").appendTo("#Especialidade");
+
+
+
+        });
+    })
+    $(".edit").click(function () {
+        var id = $(this).attr("data-id");
+
+        $("#modalEditar").load("TCuidador?id=" + id, function () {
+
+            $("#modalEditar").modal();
+
+
+        })
+    });
+    $(function () {
+
+        $(".edit").click(function () {
+
+            $("#modalEditar").modal();
+
+
+
+        });
+
+        function initMap() {
+            var locations = [
+                 @Html.Raw(ViewBag.MAP)
+                /*
+                 * Next point on map
+                 *   -Notice how the last number within the brackets incrementally increases from the prior marker
+                 *   -Use http://itouchmap.com/latlong.html to get Latitude and Longitude of a specific address
+                 *   -Follow the model below:
+                 *      ['<b>Name 3</b><br>Address Line 1<br>City, ST Zipcode<br>Phone: ###-###-####<br><a href="#" target="_blank">Link<a> of some sort.', ##.####, -##.####, #]
+                 */
+            ];
+
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+
+                /* Zoom level of your map */
+
+                center: new google.maps.LatLng(-12.404929, -38.437141)
+
+                ,
+
+                    /* coordinates for the center of your map */
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    zoom: 10,
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map    ,
+                    center: new google.maps.LatLng(-12.404929, -38.437141)
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+
+        
+    });
+
+
+
+</script>

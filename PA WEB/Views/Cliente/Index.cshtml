@@ -1,0 +1,590 @@
+﻿@model PA.Web.Models.UsuarioMOD
+
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style>
+
+    #imagePreview {
+        width: 180px;
+        height: 180px;
+        background-position: center center;
+        background-size: cover;
+        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+        display: inline-block;
+        content: "click Here";
+        color: black;
+    }
+
+        #imagePreview img {
+            width: 100%;
+        }
+
+    #imagePreview2 {
+        width: 180px;
+        height: 180px;
+        background-position: center center;
+        background-size: cover;
+        -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+        display: inline-block;
+        content: "click Here";
+        color: black;
+    }
+
+        #imagePreview2 img {
+            width: 100%;
+        }
+
+    input[type="file"] {
+        display: none;
+    }
+</style>
+<!-- Corpo Detalhe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <input type="submit" style="margin:15px 2px"
+               name="cadastrar"
+               value="Adicionar >>" class="btn btn-success add" />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Usuário
+
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dtPadrao">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descrição </th>
+                                <th>Login </th>
+                                <th>Permissão </th>
+                                @*<th>Estação</th>*@
+                                <th>Editar</th>
+                                <th>Deletar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model.lstUsuarioMod)
+                            {
+                                <tr>
+                                    <td align="justify">@usuario.Id</td>
+                                    <td align="justify">@usuario.Nome</td>
+                                    <td align="justify">@usuario.Login</td>
+                                    <td align="justify">@usuario.GrupoUsuario.Descricao</td>
+
+                                    @*<td width="10%" align="center">
+                                            <button class="btn btn-warning estacao" data-container="@usuario" data-bind="@usuario" data-id="@usuario.Id">
+                                                <i class="fa  fa-laptop fa-fw"></i>
+
+
+                                            </button>
+
+
+                                        </td>*@
+                                    <td width="10%" align="center">
+                                        <button class="btn btn-warning edit bg-warning" data-container="@usuario" data-bind="@usuario" data-id="@usuario.Id">
+                                            <i class="glyphicon glyphicon-edit"></i>
+
+                                        </button>
+
+                                    </td>
+                                    <td width="10%" align="center">
+                                        <button class="btn btn-danger delete" data-id="@usuario.Id">
+                                            <i class="glyphicon glyphicon-trash"></i>
+
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- Modal EDITAR-->
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog">
+    @Html.Partial("TEdit")
+    <!-- /.modal-dialog -->
+</div>
+<!-- FIM  Modal EDITAR-->
+<!-- Modal EDITAR-->
+<div class="modal fade" id="modalDeletar" tabindex="-1" role="dialog">
+    @Html.Partial("TDelete")
+    <!-- /.modal-dialog -->
+</div>
+<!-- FIM  Modal EDITAR-->
+<!-- Modal CADASTRAR-->
+<div class="modal fade" id="modalCadastrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cadastro de Usuario </h4>
+            </div>
+            <div class="modal-body ">
+                <div class="container ">
+                    <div class="modal-body ">
+                        <div class="container ">
+                            @*Ou programa em HTML PURO ou utilize os HTML HELPERS
+                                HELPERS são formas elegantes de gerar HTML a partir
+                                de código em Visual C#*@
+                            @*BeginForm vai gerar uma tag <FORM> e dentro dele
+                                passamos 3 parametro
+                                Nome da action, nome do Controller e o tipo de envio*@
+
+                            @using (Html.BeginForm("Cadastrar", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                            <div class="col-md-5">
+
+
+
+
+
+
+
+                                <div class="contain animated bounce">
+
+                                    <div class="alert"></div>
+                                    <div id='imagePreview' style="margin:0 auto;"> </div>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <label class="custom-file-label" for="inputGroupFile01">Escolha a sua foto:</label>
+
+                                            @Html.TextBoxFor(x => x.File, new { @id = "uploadFile", @class = "img", @name = "image", type = "file" })
+                                            @*  <input type="file" id="inputGroupFile01" class="imgInp custom-file-input" aria-describedby="inputGroupFileAddon01">*@
+
+                                        </div>
+                                    </div>
+
+                                    @*@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div>
+                    @Html.LabelFor(x => x.File)
+                    @Html.TextBoxFor(x => x.File, new { type = "file" })
+                    @Html.ValidationMessageFor(x => x.File)
+                </div>
+
+                <button type="submit">Carregar foto</button>
+            }*@
+
+                                </div>
+
+                                <br />
+                                @Html.LabelFor(x => x.Nome)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", @placeholder = "Nome do usuário. Ex: João Fulano de Tal" })
+                                    @Html.ValidationMessageFor(x => x.Nome)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Login)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in " aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Login, new { @class = "form-control", @placeholder = "Apelido para entrar no sistema. Ex: joao.fulano" })
+                                    @Html.ValidationMessageFor(x => x.Login)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Senha)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-shield fa-fw" aria-hidden="true"></span></span>
+                                    @Html.PasswordFor(x => x.Senha, new { @class = "form-control", @placeholder = "Apelido para entrar no sistema. Ex: joao.fulano", @type = "password" })
+                                    @Html.ValidationMessageFor(x => x.Senha)
+                                </div>
+                                <br />
+
+                                @Html.LabelFor(x => x.CpfCnpj)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-shield fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.CpfCnpj, new { @class = "form-control", @placeholder = "Cpf ou Cnpj para entrar no sistema. Ex: 99999999999" })
+                                    @Html.ValidationMessageFor(x => x.CpfCnpj)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Cep)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Cep, new { @id = "cep", @class = "form-control", @placeholder = "Cep do usuário. Ex: 99 999 999" })
+                                    @Html.ValidationMessageFor(x => x.Cep)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Endereco)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Endereco, new { @class = "form-control", @placeholder = "Endereco do usuário. Ex: João Fulano de Tal" })
+                                    @Html.ValidationMessageFor(x => x.Endereco)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Latitude)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Latitude, new { @class = "form-control", @placeholder = "Latitude do usuário. Ex: 12.35453.369" })
+                                    @Html.ValidationMessageFor(x => x.Latitude)
+                                </div>
+                                <br />
+
+
+                                <br />
+                                @Html.LabelFor(x => x.Longitude)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Longitude, new { @class = "form-control", @placeholder = "Longitude do usuário. Ex: 12.35453.369" })
+                                    @Html.ValidationMessageFor(x => x.Longitude)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Rg)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Rg, new { @class = "form-control", @placeholder = "Rg do usuário. Ex: 79 999999999" })
+                                    @Html.ValidationMessageFor(x => x.Rg)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Estado)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Estado, new { @class = "form-control", @placeholder = "Rg do usuário. Ex: 79 999999999" })
+                                    @Html.ValidationMessageFor(x => x.Estado)
+                                </div>
+                                <br />
+
+                                <br />
+                                @Html.LabelFor(x => x.Cidade)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Cidade, new { @class = "form-control", @placeholder = "Rg do usuário. Ex: 79 999999999" })
+                                    @Html.ValidationMessageFor(x => x.Cidade)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Bairro)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-phone-square fa-fw " aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Bairro, new { @class = "form-control", @placeholder = "Bairro do usuário. Ex: 71 991194062" })
+                                    @Html.ValidationMessageFor(x => x.Bairro)
+                                </div>
+                                <br />
+
+
+                                <div class="input-group">
+                                    <br />
+                                    @Html.LabelFor(x => x.FlagAtivo)
+                                    @Html.CheckBoxFor(x => x.FlagAtivo, new { @class = "form-control", @placeholder = "Selecione para ativar o usuario" })
+                                    @Html.ValidationMessageFor(x => x.FlagAtivo)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Idade)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Idade, new { @class = "form-control", @placeholder = "Rg do usuário. Ex: 79 999999999" })
+                                    @Html.ValidationMessageFor(x => x.Idade)
+                                </div>
+
+                                @Html.LabelFor(x => x.GrupoUsuario)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-group fa-fw" aria-hidden="true"></span></span>
+                                    @Html.DropDownListFor(x => x.GrupoUsuario.Id, (IEnumerable<SelectListItem>)ViewBag.GrupoUsuario, new { @class = "form-control" })
+                                </div>
+                                <br />
+                                <br />
+                                @Html.LabelFor(x => x.Email)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-envelope-o fa-fw " aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "E-mail do usuário. Ex: joao@fulano.com.br", @type = "email" })
+                                    @Html.ValidationMessageFor(x => x.Email)
+                                </div>
+                                <br />
+                                @Html.LabelFor(x => x.Celular)
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-phone-square fa-fw " aria-hidden="true"></span></span>
+                                    @Html.TextBoxFor(x => x.Celular, new { @class = "form-control", @placeholder = "Celular do usuário. Ex: 71 991194062" })
+                                    @Html.ValidationMessageFor(x => x.Celular)
+                                </div>
+                                <div class="input-group">
+                                    <br />
+                                    @Html.LabelFor(x => x.FlagAtivo)
+                                    @Html.CheckBoxFor(x => x.FlagAtivo, new { @class = "form-control", @placeholder = "Selecione para ativar o usuario" })
+                                    @Html.ValidationMessageFor(x => x.FlagAtivo)
+                                </div>
+                                <br />
+
+
+
+                                <div>
+
+                                    <table border="0">
+                                        <tr>
+
+                                            <td valign="top" align="left">
+                                                <h4>Especialidade Disponíveis</h4>
+
+                                                <ul class="list-group">
+                                                    @Html.ListBoxFor(x => x.Especialidade, (IEnumerable
+                                                    <SelectListItem>)ViewBag.Especialidade, new { @id = "AvailableCategories2", @class = "form-control", @style = "width:100%" })
+                                                </ul>
+                                            </td>
+
+
+                                            <td valign="middle" align="center">
+                                                <input id="btnAdd" style="margin:10px;" type="button" value=" > " onclick="addConfiguracao2();" /><br />
+                                                <input id="btnRemove" style="margin:10px;" type="button" value=" < " onclick="removeConfiguracao2();" /><br />
+                                            </td>
+                                            <td valign="top" align="left">
+                                                <h4>Especialidade Adicionados</h4>
+                                                <ul class="list-group">
+                                                    <content>
+                                                        <datalist id="lista"></datalist>
+
+                                                    </content>
+                                                    @Html.ListBoxFor(x => x.EspecialidadeTratado, (IEnumerable<SelectListItem>)ViewBag.EspecialidadeTratado, new { @id = "SelectedCategories2", @class = "form-control" })
+
+
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                  
+                                <br />
+                                <br />
+                                <div class="modal-footer">
+                                    <input type="reset"
+                                           name="limpar"
+                                           value="Limpar" class="btn btn-default" />
+                                    <input type="submit"
+                                           name="cadastrar"
+                                           value="Cadastrar" class="btn btn-success" />
+                                </div>
+                            </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- FIM  Modal CADASTRAR-->
+
+<script>
+
+    $('input[type=file]').change(function () {
+        console.dir(this.value);
+        console.dir(this.files[0])
+    })
+
+    $("#uploadFile").on("change", function () {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test(files[0].type)) { // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () { // set image data as background of div
+                $("#imagePreview").css("background-image", "url(" + this.result + ")");
+            }
+        }
+    });
+    $('#imagePreview').click(function () {
+        $('#uploadFile').trigger('click');
+    });
+
+    $("#uploadFile2").on("change", function () {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test(files[0].type)) { // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () { // set image data as background of div
+                $("#imagePreview2").css("background-image", "url(" + this.result + ")");
+            }
+        }
+    });
+    $('#imagePreview2').click(function () {
+        $('#uploadFile2').trigger('click');
+    });
+
+    $("#inputGroupFile01").change(function (event) {
+        RecurFadeIn();
+        readURL(this);
+    });
+    $("#inputGroupFile01").on('click', function (event) {
+        RecurFadeIn();
+    });
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var filename = $("#inputGroupFile01").val();
+            filename = filename.substring(filename.lastIndexOf('\\') + 1);
+            reader.onload = function (e) {
+                debugger;
+                $('#blah').attr('src', e.target.result);
+                $('#blah').hide();
+                $('#blah').fadeIn(500);
+                $('.custom-file-label').text(filename);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        $(".alert").removeClass("loading").hide();
+    }
+
+
+    $("#inputGroupFile02").change(function (event) {
+        RecurFadeIn();
+        readURL(this);
+    });
+    $("#inputGroupFile02").on('click', function (event) {
+        RecurFadeIn();
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var filename = $("#inputGroupFile02").val();
+            filename = filename.substring(filename.lastIndexOf('\\') + 1);
+            reader.onload = function (e) {
+                debugger;
+                $('#blah').attr('src', e.target.result);
+                $('#blah').hide();
+                $('#blah').fadeIn(500);
+                $('.custom-file-label').text(filename);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        $(".alert").removeClass("loading").hide();
+    }
+    function RecurFadeIn() {
+        console.log('ran');
+        FadeInAlert("Só um momento...");
+    }
+    function FadeInAlert(text) {
+        $(".alert").show();
+        $(".alert").text(text).addClass("loading");
+    }
+    //////////
+
+    function addConfiguracao2() {
+        $("#AvailableCategories2 option:selected").appendTo("#SelectedCategories2");
+    }
+
+    function removeConfiguracao2() {
+        $("#SelectedCategories2 option:selected").appendTo("#AvailableCategories2");
+    }
+    function addConfiguracao3() {
+        $("#AvailableCategories3 option:selected").appendTo("#SelectedCategories3");
+    }
+
+    function removeConfiguracao3() {
+        $("#SelectedCategories3 option:selected").appendTo("#AvailableCategories3");
+    }
+
+    $('#product-table a:first').tab('show');
+
+
+    $(document).ready(function () {
+        $('#dtPadrao').dataTable({
+            "aLengthMenu": [[8, 50, 75, -1], [8, 50, 75, "Todos"]],
+            "iDisplayLength": 8
+        });
+    });
+    function add() {
+
+    }
+
+    function remove() {
+
+    }
+    $(function () {
+        $(".add").click(function () {
+
+            $("#modalCadastrar").modal();
+
+
+
+        });
+
+        $(".adiciona").click(function () {
+
+            $("#Especialidade option:selected").appendTo("#EspecialidadeTratado");
+
+
+
+        });
+
+        $(".remove").click(function () {
+            $("#EspecialidadeTratado option:selected").appendTo("#Especialidade");
+
+
+
+        });
+    })
+
+
+    $(".estacao").click(function () {
+        window.location.href = '../Estacao/Index'
+
+
+    });
+
+
+
+
+
+    $(".edit").click(function () {
+        var id = $(this).attr("data-id");
+
+        $("#modalEditar").load("TEdit?id=" + id, function () {
+
+            $("#modalEditar").modal();
+
+
+        })
+    });
+
+
+    $(".delete").click(function () {
+        var id = $(this).attr("data-id");
+
+        $("#modalDeletar").load("TDelete?id=" + id, function () {
+
+            $("#modalDeletar").modal();
+
+
+        })
+    });
+
+
+        function initMap() {
+    var input = document.getElementById('searchMapInput');
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+    autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        document.getElementById('location-snap').innerHTML = place.formatted_address;
+        document.getElementById('lat-span').innerHTML = place.geometry.location.lat();
+        document.getElementById('lon-span').innerHTML = place.geometry.location.lng();
+    });
+
+         
+}
+
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9lMpmX_Oe1Jzf9gDhCzp6WwNtKKVe3HI&libraries=places&callback=initMap" async defer></script>

@@ -1,0 +1,58 @@
+﻿@model PA.Web.Models.CargaMOD
+@{
+
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        @using (Ajax.BeginForm("Deletar", "Carga", FormMethod.Post,
+                        new AjaxOptions
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST",
+                            UpdateTargetId = "container"
+                        }))
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Desejar realmente excluir?</h4>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Id, new { @Value = ViewBag.Id, @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Id)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Carga, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Carga, new { @Value = ViewBag.Descricao, @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Carga)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Valor, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Valor, new { @Value = ViewBag.Descricao, @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Valor)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

@@ -1,0 +1,94 @@
+﻿@model  PA.Web.Models.QuadroAvisoMOD
+@{
+
+    Layout = "~/Views/Shared/_Modal.cshtml";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Ajax.BeginForm("Atualizar", "QuadroAviso", FormMethod.Post,
+                                                    new AjaxOptions
+                                                    {
+                                                        InsertionMode = InsertionMode.Replace,
+                                                        HttpMethod = "POST",
+                                                        UpdateTargetId = "container"
+                                                    }))
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edição</h4>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-database fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Id, new { @Value = ViewBag.Id, @class = "form-control", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Assunto, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="fa  fa-user fa-fw" aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(model => model.Assunto, new { @Value = ViewBag.Assunto, @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Conteudo, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in " aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Conteudo, new { @Value = ViewBag.Conteudo, @class = "form-control", @placeholder = "Ainda não uma solução." })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Data, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in " aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Data, new { @Value = ViewBag.Data, @class = "form-control", @placeholder = "Ainda não uma solução." })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br /><div class="form-group">
+                        @Html.LabelFor(x => x.Usuario, new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-log-in " aria-hidden="true"></span></span>
+                                @Html.TextBoxFor(x => x.Usuario, new { @Value = ViewBag.Usuario, @class = "form-control", @placeholder = "Ainda não uma solução." })
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <input type="submit" value="Atualizar" class="btn btn-warning" />
+                <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+            </div>
+        }
+    </div><!-- /.modal-content -->
+
+</div><!-- /.modal-dialog -->
